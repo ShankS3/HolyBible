@@ -1,11 +1,10 @@
-module.exports = {
+{
   "root": true,
   "extends": [
     "eslint:recommended",
     "plugin:import/errors",
     "plugin:import/warnings",
-    "plugin:react/recommended",
-    "@react-native-community"
+    "plugin:react/recommended"
   ],
   "plugins": [
     "react"
@@ -94,4 +93,4 @@ module.exports = {
     "react/sort-comp": 1
   },
   "globals": {}
-};
+}
