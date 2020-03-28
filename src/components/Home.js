@@ -1,38 +1,47 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import {SafeAreaView, View, StyleSheet} from 'react-native';
+import {SafeAreaView, StyleSheet, Text} from 'react-native';
 
-import ListContainer from './common/ListContainer';
+import CardListContainer from './common/CardListContainer';
 
-function Home({testaments, selectTestament, navigation}) {
-  const onItemPress = (itemId) => {
-    selectTestament(itemId);
+function Home({testaments, testamentActions, navigation}) {
+
+  useEffect(() => {
+    testamentActions.onFetchTestaments();
+  }, []);
+
+  const onItemPress = (item) => {
+    testamentActions.onSelectTestament(item);
     navigation.push("Testament");
   };
 
   return (
     <SafeAreaView style={styles.parent}>
-      <View style={styles.backgroundColor}>
-        <ListContainer
-          title="Testaments"
-          list={testaments}
-          onClickEvent={onItemPress}
-        />
-      </View>
+      {
+        testaments.error 
+        ? <Text>{testaments.errorMessage || "Nothing to load"}</Text>
+        : (
+          <CardListContainer
+            list={testaments.list}
+            onClickEvent={onItemPress}
+          />
+        )
+      }
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   parent: {
-    backgroundColor: '#001',
+    backgroundColor: '#ececec',
     height: '100%',
+    flex: 1
   },
 });
 
 Home.propTypes = {
-  testaments: PropTypes.array.isRequired,
-  selectTestament: PropTypes.func.isRequired,
+  testaments      : PropTypes.object.isRequired,
+  testamentActions: PropTypes.object.isRequired
 }
 
 export default Home;

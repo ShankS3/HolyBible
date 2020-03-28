@@ -2,16 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {SafeAreaView, SectionList, View, Text, StyleSheet} from 'react-native';
 
-function Item({id}) {
-  let selectedVerse = this.props.verses.find(verse => verse.id === id);
-  return (
-    <View>
-      <Text style={style.verse}>{id + ' ' + selectedVerse.verse}</Text>
-    </View>
-  );
-}
-
-function Chapter({titles}) {
+function Chapter({titles, verses}) {
+  const Item = ({id}) => {
+    let selectedVerse = verses.find(verse => verse.id === id);
+    return (
+      <View>
+        <Text style={style.verse}>{id + ' ' + selectedVerse.verse}</Text>
+      </View>
+    );
+  }
+  
   return (
     <SafeAreaView style={style.parent}>
       <SectionList
@@ -31,6 +31,7 @@ const style = StyleSheet.create({
     backgroundColor: '#001',
     color: '#ECECEC',
     height: '100%',
+    padding: 10
   },
   versesTitle: {
     fontSize: 21,

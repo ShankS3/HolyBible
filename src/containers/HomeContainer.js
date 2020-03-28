@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {onSelectTestament} from '../actions/selectionAction';
+import * as testamentActions from '../actions/testamentActions';
 import Home from '../components/Home';
 
 const mapStateToProps = state => {
@@ -11,7 +11,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    selectTestament : bindActionCreators(onSelectTestament, dispatch)
+    testamentActions: bindActionCreators(testamentActions, dispatch)
   }
 }
 

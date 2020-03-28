@@ -1,17 +1,18 @@
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {onSelectChapter} from '../actions/selectionAction';
+import * as chapterActions from '../actions/chapterActions';
 import Book from '../components/Book';
 
 const mapStateToProps = state => {
   return {
-    chapters: state.list.chapters
+    chapters    : state.list.chapters,
+    selectedBook: state.selection.book
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    selectChapter : bindActionCreators(onSelectChapter, dispatch)
+    chapterActions : bindActionCreators(chapterActions, dispatch)
   }
 }
 
